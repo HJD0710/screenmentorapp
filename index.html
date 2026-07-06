@@ -1,12 +1,413 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Screen Mentor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Mentor — Digital Wellbeing Coach</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f0f4ff 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header / Hero Section */
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header p.subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-img {
+            width: 280px;
+            max-width: 90%;
+            margin: 0 auto;
+            display: block;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Main Content */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-card h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Mentors Section */
+        .mentors-header {
+            text-align: center;
+            margin: 80px 0 50px 0;
+        }
+
+        .mentors-header h2 {
+            font-size: 36px;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .mentors-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Mentor Grid */
+        .mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .mentor-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+        }
+
+        .mentor-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .mentor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .mentor-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .mentor-card p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            margin: 80px 0 40px 0;
+        }
+
+        .download-section h2 {
+            font-size: 28px;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .download-buttons a {
+            display: inline-block;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-buttons a:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 10px 20px rgba(102, 126, 234, 0.2));
+        }
+
+        .download-buttons img {
+            width: 160px;
+            height: auto;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            border-top: 1px solid rgba(102, 126, 234, 0.1);
+            margin-top: 60px;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            header h1 {
+                font-size: 36px;
+            }
+
+            header p.subtitle {
+                font-size: 18px;
+            }
+
+            .mentors-header h2 {
+                font-size: 28px;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .features-grid,
+            .mentors-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .download-buttons img {
+                width: 140px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Screen Mentor</h1>
-  <p>Digital Detox & Screen Time Coach</p>
-  <p>Official website: screenmentorapp.com</p>
+
+<header>
+    <h1>Screen Mentor</h1>
+    <p class="subtitle">Your digital wellbeing coach — build healthier screen habits</p>
+    <img src="app-preview.png" class="hero-img" alt="App Preview">
+</header>
+
+<div class="section">
+
+    <!-- App Features -->
+    <div class="features-grid">
+        <div class="feature-card">
+            <h2>📱 Control App Usage Time</h2>
+            <p>Select the apps you want to limit and set daily usage caps to regain control of your digital life.</p>
+        </div>
+
+        <div class="feature-card">
+            <h2>⏱ Smart Daily Limits</h2>
+            <p>Adjust your daily limit from 15 minutes to 24 hours — fully customizable to your lifestyle.</p>
+        </div>
+
+        <div class="feature-card">
+            <h2>📊 Today's Overview</h2>
+            <p>See your daily usage clearly and build healthier screen habits with simple, visual insights.</p>
+        </div>
+    </div>
+
+    <!-- Mentor Showcase -->
+    <div class="mentors-header">
+        <h2>Meet Your Mentors</h2>
+        <p>Screen Mentor offers a unique set of digital wellbeing guides — each with a different personality and coaching style.</p>
+    </div>
+
+    <div class="mentors-grid">
+        <div class="mentor-card">
+            <h3>🧘 The Monk Mentor</h3>
+            <p><strong>Mindful Discipline</strong></p>
+            <p>Find calm, clarity, and focus. The Monk Mentor guides you with gentle reminders and mindful habits to reduce distractions.</p>
+        </div>
+
+        <div class="mentor-card">
+            <h3>🥷 The Ninja Mentor</h3>
+            <p><strong>Precision & Control</strong></p>
+            <p>Fast, sharp, and decisive. The Ninja Mentor helps you cut through digital noise and stay disciplined with your screen time.</p>
+        </div>
+
+        <div class="mentor-card">
+            <h3>🔮 The Witch Mentor</h3>
+            <p><strong>Magical Motivation</strong></p>
+            <p>A spark of magic for your routine. The Witch Mentor encourages positive habits and brings creativity into your digital wellbeing.</p>
+        </div>
+
+        <div class="mentor-card">
+            <h3>👽 The Alien Mentor</h3>
+            <p><strong>Future‑Ready Habits</strong></p>
+            <p>Smart and logical. The Alien Mentor analyzes your patterns and helps you build long‑term digital wellbeing habits.</p>
+        </div>
+
+        <div class="mentor-card">
+            <h3>☮️ The Peace Sage</h3>
+            <p><strong>Calm & Balance</strong></p>
+            <p>Harmony and balance for your day. The Peace Sage helps you stay grounded and maintain a peaceful digital routine.</p>
+        </div>
+    </div>
+
+    <!-- Download Section -->
+    <div class="download-section">
+        <h2>Download Now</h2>
+        <div class="download-buttons">
+            <a href="https://apps.apple.com/us/app/nekodrive/id6772045788" title="Download on App Store">
+                <img src="appstore.png" alt="Download on App Store">
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.onedaysoft.screenmentor" title="Get it on Google Play">
+                <img src="googleplay.png" alt="Get it on Google Play">
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Subscription Terms</a>
+    <p>© 2024 Screen Mentor</p>
+</footer>
+
 </body>
 </html>
