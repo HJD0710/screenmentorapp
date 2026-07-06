@@ -186,6 +186,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
 
         .mentor-card::before {
@@ -212,6 +213,11 @@
             border-radius: 12px;
             object-fit: cover;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .mentor-card:hover .mentor-image {
+            transform: scale(1.05);
         }
 
         .mentor-card h3 {
@@ -230,6 +236,138 @@
 
         .mentor-card p:first-of-type {
             margin-bottom: 10px;
+        }
+
+        .mentor-card .view-details {
+            display: inline-block;
+            margin-top: 15px;
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mentor-card:hover .view-details {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            animation: slideIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 28px;
+            margin: 0 0 10px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+        }
+
+        .modal-body h3 {
+            color: #667eea;
+            font-size: 18px;
+            margin: 15px 0 10px 0;
+        }
+
+        .modal-body p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .modal-body ul {
+            margin: 15px 0 15px 30px;
+            color: #555;
+        }
+
+        .modal-body li {
+            margin-bottom: 10px;
+            line-height: 1.8;
         }
 
         /* Download Section */
@@ -339,6 +477,11 @@
                 width: 150px;
                 height: 210px;
             }
+
+            .modal-content {
+                margin: 20px;
+                max-width: calc(100% - 40px);
+            }
         }
     </style>
 </head>
@@ -378,35 +521,44 @@
     </div>
 
     <div class="mentors-grid">
-        <div class="mentor-card">
-            <img src="monk-mentor.jpg" alt="The Monk Mentor" class="mentor-image">
+        <div class="mentor-card" onclick="openMentor('monk')">
+            <img src="monk.png" alt="The Monk Mentor" class="mentor-image">
             <h3>🧘 The Monk Mentor</h3>
             <p><strong>Mindful Discipline</strong></p>
             <p>Find calm, clarity, and focus. The Monk Mentor guides you with gentle reminders and mindful habits to reduce distractions.</p>
+            <a href="javascript:void(0)" class="view-details">View Details →</a>
         </div>
 
-        <div class="mentor-card">
+        <div class="mentor-card" onclick="openMentor('ninja')">
+            <img src="ninjia.png" alt="The Ninja Mentor" class="mentor-image">
             <h3>🥷 The Ninja Mentor</h3>
             <p><strong>Precision & Control</strong></p>
             <p>Fast, sharp, and decisive. The Ninja Mentor helps you cut through digital noise and stay disciplined with your screen time.</p>
+            <a href="javascript:void(0)" class="view-details">View Details →</a>
         </div>
 
-        <div class="mentor-card">
+        <div class="mentor-card" onclick="openMentor('witch')">
+            <img src="Seraphine_01.png" alt="The Witch Mentor" class="mentor-image">
             <h3>🔮 The Witch Mentor</h3>
             <p><strong>Magical Motivation</strong></p>
             <p>A spark of magic for your routine. The Witch Mentor encourages positive habits and brings creativity into your digital wellbeing.</p>
+            <a href="javascript:void(0)" class="view-details">View Details →</a>
         </div>
 
-        <div class="mentor-card">
+        <div class="mentor-card" onclick="openMentor('alien')">
+            <img src="Benito.png" alt="The Alien Mentor" class="mentor-image">
             <h3>👽 The Alien Mentor</h3>
             <p><strong>Future‑Ready Habits</strong></p>
             <p>Smart and logical. The Alien Mentor analyzes your patterns and helps you build long‑term digital wellbeing habits.</p>
+            <a href="javascript:void(0)" class="view-details">View Details →</a>
         </div>
 
-        <div class="mentor-card">
+        <div class="mentor-card" onclick="openMentor('sage')">
+            <img src="peace-sage.png" alt="The Peace Sage" class="mentor-image">
             <h3>☮️ The Peace Sage</h3>
             <p><strong>Calm & Balance</strong></p>
             <p>Harmony and balance for your day. The Peace Sage helps you stay grounded and maintain a peaceful digital routine.</p>
+            <a href="javascript:void(0)" class="view-details">View Details →</a>
         </div>
     </div>
 
@@ -425,11 +577,136 @@
 
 </div>
 
+<!-- Mentor Modal -->
+<div id="mentorModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close-btn" onclick="closeMentor()">&times;</button>
+            <h2 id="modalTitle"></h2>
+        </div>
+        <div class="modal-body" id="modalBody">
+        </div>
+    </div>
+</div>
+
 <footer>
     <a href="/privacy.html">Privacy Policy</a>
     <a href="/terms.html">Subscription Terms</a>
     <p>© 2024 Screen Mentor</p>
 </footer>
+
+<script>
+    const mentors = {
+        monk: {
+            title: '🧘 The Monk Mentor',
+            image: 'monk.png',
+            subtitle: 'Mindful Discipline',
+            description: 'Find calm, clarity, and focus with The Monk Mentor. This guide specializes in mindful discipline and peaceful screen habits.',
+            features: [
+                'Gentle reminders and meditation techniques',
+                'Mindfulness-based habit formation',
+                'Breathing exercises for digital detox',
+                'Peaceful notifications and calm design',
+                'Focus sessions with zen inspiration'
+            ],
+            philosophy: 'The Monk Mentor believes that true control comes from inner peace. By cultivating mindfulness and awareness, you\'ll naturally develop healthier screen habits without harsh restrictions.'
+        },
+        ninja: {
+            title: '🥷 The Ninja Mentor',
+            image: 'ninjia.png',
+            subtitle: 'Precision & Control',
+            description: 'Master the art of digital discipline with The Ninja Mentor. Fast, sharp, and decisive—perfect for taking control of your screen time.',
+            features: [
+                'Precision app blocking and controls',
+                'Sharp, actionable notifications',
+                'Strategic habit optimization',
+                'Real-time usage monitoring',
+                'Disciplined daily challenges'
+            ],
+            philosophy: 'The Ninja Mentor operates with precision and focus. Like a true ninja, they help you move through your digital world with purpose, cutting through distractions and staying on target.'
+        },
+        witch: {
+            title: '🔮 The Witch Mentor',
+            image: 'Seraphine_01.png',
+            subtitle: 'Magical Motivation',
+            description: 'Enchant your digital wellbeing journey with The Witch Mentor. This magical guide brings creativity and wonder to healthy screen habits.',
+            features: [
+                'Magical motivation and encouragement',
+                'Creative habit-building techniques',
+                'Enchanting visual rewards system',
+                'Mystical insights into your patterns',
+                'Spellbinding challenges and quests'
+            ],
+            philosophy: 'The Witch Mentor believes that building good habits should be fun and magical. Through creativity and positive reinforcement, they help you transform your relationship with screens.'
+        },
+        alien: {
+            title: '👽 The Alien Mentor',
+            image: 'Benito.png',
+            subtitle: 'Future-Ready Habits',
+            description: 'Optimize your digital life with The Alien Mentor. This intelligent guide uses data-driven insights and future-forward thinking.',
+            features: [
+                'Advanced analytics and pattern analysis',
+                'Data-driven habit recommendations',
+                'AI-powered usage predictions',
+                'Logical, systematic approach',
+                'Long-term digital wellness strategy'
+            ],
+            philosophy: 'The Alien Mentor brings a scientific, forward-thinking perspective. They analyze your patterns with cosmic intelligence to help you build sustainable, future-proof digital wellbeing habits.'
+        },
+        sage: {
+            title: '☮️ The Peace Sage',
+            image: 'peace-sage.png',
+            subtitle: 'Calm & Balance',
+            description: 'Achieve harmony and balance with The Peace Sage. This wise mentor guides you toward inner peace and digital equilibrium.',
+            features: [
+                'Balanced approach to screen time',
+                'Harmony between work and rest',
+                'Grounded wisdom and perspective',
+                'Peaceful transition techniques',
+                'Holistic wellbeing guidance'
+            ],
+            philosophy: 'The Peace Sage teaches that true digital wellbeing comes from balance. They help you find the middle path—neither too restrictive nor too permissive—leading to lasting peace.'
+        }
+    };
+
+    function openMentor(mentorId) {
+        const mentor = mentors[mentorId];
+        const modal = document.getElementById('mentorModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+
+        if (mentor) {
+            modalTitle.textContent = mentor.title;
+            modalBody.innerHTML = `
+                <img src="${mentor.image}" alt="${mentor.title}" class="modal-image">
+                <p style="color: #667eea; font-weight: 600; font-size: 18px; margin-bottom: 10px;">${mentor.subtitle}</p>
+                <p>${mentor.description}</p>
+                
+                <h3>Key Features:</h3>
+                <ul>
+                    ${mentor.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ul>
+                
+                <h3>Philosophy:</h3>
+                <p>${mentor.philosophy}</p>
+            `;
+            modal.classList.add('active');
+        }
+    }
+
+    function closeMentor() {
+        const modal = document.getElementById('mentorModal');
+        modal.classList.remove('active');
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById('mentorModal');
+        if (event.target === modal) {
+            closeMentor();
+        }
+    }
+</script>
 
 </body>
 </html>
