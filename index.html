@@ -214,6 +214,7 @@
             object-fit: cover;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
             transition: transform 0.3s ease;
+            display: block;
         }
 
         .mentor-card:hover .mentor-image {
@@ -263,6 +264,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
             animation: fadeIn 0.3s ease;
+            overflow: auto;
         }
 
         @keyframes fadeIn {
@@ -271,7 +273,7 @@
         }
 
         .modal.active {
-            display: block;
+            display: block !important;
         }
 
         .modal-content {
@@ -328,6 +330,7 @@
             transition: background 0.3s ease;
             border: none;
             padding: 0;
+            line-height: 1;
         }
 
         .close-btn:hover {
@@ -554,7 +557,7 @@
         </div>
 
         <div class="mentor-card" onclick="openMentor('sage')">
-            <img src="peace-sage.png" alt="The Peace Sage" class="mentor-image">
+            <img src="Benito.png" alt="The Peace Sage" class="mentor-image">
             <h3>☮️ The Peace Sage</h3>
             <p><strong>Calm & Balance</strong></p>
             <p>Harmony and balance for your day. The Peace Sage helps you stay grounded and maintain a peaceful digital routine.</p>
@@ -655,7 +658,7 @@
         },
         sage: {
             title: '☮️ The Peace Sage',
-            image: 'peace-sage.png',
+            image: 'Benito.png',
             subtitle: 'Calm & Balance',
             description: 'Achieve harmony and balance with The Peace Sage. This wise mentor guides you toward inner peace and digital equilibrium.',
             features: [
